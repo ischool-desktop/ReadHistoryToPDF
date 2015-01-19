@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ReadHistoryGenerator.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="XmlFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">read_history_example.xml</Value>
+    </Setting>
+    <Setting Name="OutputFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">pdf</Value>
+    </Setting>
+    <Setting Name="TextCharts" Type="System.String" Scope="User">
+      <Value Profile="(Default)">charts</Value>
+    </Setting>
+    <Setting Name="TextPdf" Type="System.String" Scope="User">
+      <Value Profile="(Default)">pdf</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
