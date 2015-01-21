@@ -72,6 +72,8 @@ namespace ReadHistoryGenerator
 
         private void MergeDocuments(string xmlFile, string pdfFolderName)
         {
+            IDNumberLookup idnl = new IDNumberLookup("vlookup.xls");
+
             XElement ds = XElement.Load(GetPath(xmlFile));
 
             int student_total = ds.XPathSelectElements("Class/Student").Count();
@@ -79,6 +81,7 @@ namespace ReadHistoryGenerator
             Aspose.Words.Document doctemplate = new Aspose.Words.Document("template.docx");
             object sync = new object();
 
+            int error_count = 0;
             Parallel.ForEach(ds.XPathSelectElements("Class/Student"), student =>
             {
                 Aspose.Words.Document doc = null;
@@ -89,16 +92,32 @@ namespace ReadHistoryGenerator
 
                 HistorySource hs = new HistorySource(student, "", "Student");
                 string id = student.Element("ID").Value;
-                string stu_number = student.Element("StudentNumber").Value;
+                //string stu_number = student.Element("StudentNumber").Value;
                 string stu_name = student.Element("Name").Value;
-                string stu_seat = student.Element("SeatNo").Value;
+                string cls_name = student.Element("ClassName").Value;
+                string seatNo = student.Element("SeatNo").Value;
 
+                int i = 0;
+                string stu_seat = int.TryParse(seatNo, out i) ? i + "" : seatNo;
+
+                IDNumberLookup.StudentData stu_data = idnl.GetStudentData(cls_name, stu_seat);
+
+                if (stu_data == null)
+                    stu_data = new IDNumberLookup.StudentData();
+
+                //名字不對就顯示查無證號 + error_count
+                if (stu_data.Name != stu_name)
+                {
+                    stu_data.IDNumber = string.Format("查無證號{0}{1}", error_count, stu_name);
+                    error_count++;
+                }
+                    
                 doc.MailMerge.CleanupOptions = Aspose.Words.MailMerging.MailMergeCleanupOptions.RemoveEmptyParagraphs;
                 doc.MailMerge.FieldMergingCallback = new FieldMergingCallback();
                 doc.MailMerge.ExecuteWithRegions(hs);
                 doc.MailMerge.DeleteFields();
 
-                string fn = string.Format("{0}/{1}.pdf", GetPath(pdfFolderName), GetMainFN(stu_number, stu_name, stu_seat));
+                string fn = string.Format("{0}/{1}.pdf", GetPath(pdfFolderName), Util.GenerateFileName(stu_data.IDNumber));
                 Aspose.Words.Saving.SaveOptions so = Aspose.Words.Saving.SaveOptions.CreateSaveOptions(Aspose.Words.SaveFormat.Pdf);
 
                 doc.Save(fn, Aspose.Words.SaveFormat.Pdf);
@@ -188,6 +207,10 @@ namespace ReadHistoryGenerator
 
         private void GenerateCharts()
         {
+            //建立charts目錄
+            if (!Directory.Exists(txtChart.Text))
+                Directory.CreateDirectory(txtChart.Text);
+
             Aspose.Cells.Workbook wb = new Aspose.Cells.Workbook("example.xlsx");
 
             Aspose.Cells.Rendering.ImageOrPrintOptions opt = new Aspose.Cells.Rendering.ImageOrPrintOptions();
@@ -264,7 +287,8 @@ namespace ReadHistoryGenerator
                     else
                         ws.Cells[stuOffset, stuRng.FirstColumn].PutValue(string.Empty);
 
-                    ws.Charts["PersonalChart"].ToImage(GetStudentChartLocation(txtChart.Text, stu_number, stu_name, stu_seat), opt);
+                    string path = GetStudentChartLocation(txtChart.Text, stu_number, stu_name, stu_seat);
+                    ws.Charts["PersonalChart"].ToImage(path, opt);
                     ws.Charts["ClassChart"].ToImage(GetClassChartLocation(txtChart.Text, stu_number, stu_name, stu_seat), opt);
                     //wb.Save(GetStudentChartLocation(txtChart.Text, stu_number, stu_name, stu_seat) + ".xls");
 
