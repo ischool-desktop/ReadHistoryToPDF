@@ -61,7 +61,7 @@ namespace ReadHistoryGenerator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("pdf")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2015101{0}01")]
         public string TextPdf {
             get {
                 return ((string)(this["TextPdf"]));

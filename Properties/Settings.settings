@@ -12,7 +12,7 @@
       <Value Profile="(Default)">charts</Value>
     </Setting>
     <Setting Name="TextPdf" Type="System.String" Scope="User">
-      <Value Profile="(Default)">pdf</Value>
+      <Value Profile="(Default)">2015101{0}01</Value>
     </Setting>
   </Settings>
 </SettingsFile>

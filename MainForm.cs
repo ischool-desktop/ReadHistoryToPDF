@@ -315,5 +315,10 @@ namespace ReadHistoryGenerator
                     lblProgress.Text = string.Format("進度：{0}/{1}", current, total);
             }
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            Util.Pattern = txtPattern.Text;
+        }
     }
 }

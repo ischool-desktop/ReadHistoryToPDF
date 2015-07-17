@@ -20,7 +20,7 @@ namespace ReadHistoryGenerator
                 Aspose.Cells.License cell_lic = new Aspose.Cells.License();
                 cell_lic.SetLicense(licdata);
 
-                licdata.Seek(0, SeekOrigin.Begin); 
+                licdata.Seek(0, SeekOrigin.Begin);
                 Aspose.Words.License word_lic = new Aspose.Words.License();
                 word_lic.SetLicense(licdata);
 

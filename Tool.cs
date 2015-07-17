@@ -8,9 +8,11 @@ namespace ReadHistoryGenerator
 {
     public static class Util
     {
+        public static string Pattern { get; set; }
+
         public static string GenerateFileName(string ID)
         {
-            return string.Format("2014101{0}01", ID);
+            return string.Format(Pattern, ID);
         }
     }
 

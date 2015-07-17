@@ -37,12 +37,14 @@
             this.txtXmlFile = new System.Windows.Forms.TextBox();
             this.btnDraw = new System.Windows.Forms.Button();
             this.lblProgress = new System.Windows.Forms.Label();
+            this.txtPattern = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnRun
             // 
             this.btnRun.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnRun.Location = new System.Drawing.Point(243, 111);
+            this.btnRun.Location = new System.Drawing.Point(243, 154);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(107, 23);
             this.btnRun.TabIndex = 1;
@@ -82,7 +84,6 @@
             this.txtChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtChart.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ReadHistoryGenerator.Properties.Settings.Default, "TextCharts", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtChart.Enabled = false;
             this.txtChart.Location = new System.Drawing.Point(71, 39);
             this.txtChart.Name = "txtChart";
             this.txtChart.Size = new System.Drawing.Size(279, 22);
@@ -94,7 +95,6 @@
             this.txtPdf.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPdf.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ReadHistoryGenerator.Properties.Settings.Default, "TextPdf", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtPdf.Enabled = false;
             this.txtPdf.Location = new System.Drawing.Point(71, 68);
             this.txtPdf.Name = "txtPdf";
             this.txtPdf.Size = new System.Drawing.Size(279, 22);
@@ -115,7 +115,7 @@
             // btnDraw
             // 
             this.btnDraw.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnDraw.Location = new System.Drawing.Point(130, 111);
+            this.btnDraw.Location = new System.Drawing.Point(130, 154);
             this.btnDraw.Name = "btnDraw";
             this.btnDraw.Size = new System.Drawing.Size(107, 23);
             this.btnDraw.TabIndex = 4;
@@ -127,22 +127,43 @@
             // 
             this.lblProgress.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblProgress.AutoSize = true;
-            this.lblProgress.Location = new System.Drawing.Point(19, 116);
+            this.lblProgress.Location = new System.Drawing.Point(19, 159);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(46, 12);
             this.lblProgress.TabIndex = 6;
             this.lblProgress.Text = "(進度...)";
             // 
+            // txtPattern
+            // 
+            this.txtPattern.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPattern.Location = new System.Drawing.Point(71, 95);
+            this.txtPattern.Name = "txtPattern";
+            this.txtPattern.Size = new System.Drawing.Size(279, 22);
+            this.txtPattern.TabIndex = 3;
+            this.txtPattern.Text = "2015101{0}01";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 100);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 12);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Pattern";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 146);
+            this.ClientSize = new System.Drawing.Size(362, 189);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDraw);
+            this.Controls.Add(this.txtPattern);
             this.Controls.Add(this.txtChart);
             this.Controls.Add(this.txtPdf);
             this.Controls.Add(this.txtXmlFile);
@@ -150,6 +171,7 @@
             this.Name = "MainForm";
             this.Text = "讀書紀錄產生器";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,6 +188,8 @@
         private System.Windows.Forms.TextBox txtChart;
         private System.Windows.Forms.Button btnDraw;
         private System.Windows.Forms.Label lblProgress;
+        private System.Windows.Forms.TextBox txtPattern;
+        private System.Windows.Forms.Label label4;
     }
 }
 
